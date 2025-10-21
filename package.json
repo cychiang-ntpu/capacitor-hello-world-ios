@@ -1,0 +1,54 @@
+{
+  "name": "capacitor-hello-world-ios",
+  "version": "1.0.0",
+  "description": "A simple Hello World app using Capacitor for iOS - 使用 Capacitor 技術將網頁應用程式打包成原生 iOS 應用程式的完整教學專案",
+  "main": "index.html",
+  "homepage": "https://github.com/cychiang-ntpu/capacitor-hello-world-ios",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cychiang-ntpu/capacitor-hello-world-ios.git"
+  },
+  "bugs": {
+    "url": "https://github.com/cychiang-ntpu/capacitor-hello-world-ios/issues"
+  },
+  "scripts": {
+    "build": "mkdir -p dist && cp index.html dist/ && cp -r js dist/",
+    "open:ios": "npx cap open ios",
+    "sync:ios": "npx cap sync ios", 
+    "copy": "npx cap copy",
+    "serve": "npx http-server dist -p 8080",
+    "dev": "npm run serve",
+    "clean": "rm -rf dist ios node_modules",
+    "reset:ios": "rm -rf ios && npm run build && npx cap add ios",
+    "build:ios": "npm run build && npx cap sync ios",
+    "deploy:ios": "npm run build:ios && npx cap open ios"
+  },
+  "keywords": [
+    "capacitor",
+    "ios",
+    "mobile",
+    "app",
+    "tutorial",
+    "hello-world",
+    "hybrid-app",
+    "cross-platform",
+    "web-to-native",
+    "ionic",
+    "教學",
+    "範例"
+  ],
+  "author": {
+    "name": "CY Chiang",
+    "email": "cychiang@ntpu.edu.tw",
+    "url": "https://github.com/cychiang-ntpu"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@capacitor/cli": "^5.5.1",
+    "http-server": "^14.1.1"
+  },
+  "dependencies": {
+    "@capacitor/core": "^5.5.1",
+    "@capacitor/ios": "^5.5.1"
+  }
+}
