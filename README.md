@@ -305,21 +305,284 @@ npx cap open ios
 
 ### 📱 方法三：在實體 iPhone/iPad 上測試
 
-#### 準備工作
+#### 📋 前置需求檢查
 
-1. **連接裝置**：使用 USB 線連接 iOS 裝置到 Mac
-2. **信任電腦**：在裝置上選擇「信任此電腦」
-3. **開發者設定**：需要 Apple ID（免費即可）
+在開始之前，確保你有：
+- ✅ 一台 Mac 電腦
+- ✅ 一根 Lightning 或 USB-C 傳輸線
+- ✅ iOS 13.0 或更高版本的 iPhone/iPad
+- ✅ 一個 Apple ID（免費帳號即可）
 
-#### 在 Xcode 中設定
+#### 🔧 準備工作
 
-1. 選擇你的實體裝置（會顯示在裝置列表中）
-2. 在專案設定中：
-   - 點擊 `App` 專案
-   - 選擇 `Signing & Capabilities`
-   - 勾選 `Automatically manage signing`
-   - 選擇你的 `Team`（Apple ID）
-3. 點擊執行
+##### 1. **連接裝置**
+```bash
+# 使用 USB 線連接 iOS 裝置到 Mac
+# 確保使用原廠或 MFi 認證的傳輸線
+```
+
+##### 2. **信任電腦**
+當你第一次連接裝置時：
+- iPhone 會顯示「信任此電腦？」的彈出視窗
+- 點擊「信任」
+- 輸入 iPhone 的密碼確認
+
+##### 3. **開發者設定**
+- 需要一個 Apple ID（免費即可，不需要 $99/年的開發者帳號）
+- 確保你的 Apple ID 已在 Mac 上登入
+
+#### 🛠 在 Xcode 中設定
+
+##### 步驟 1：開啟專案並選擇裝置
+```bash
+# 確保專案已建構和同步
+npm run build
+npx cap sync ios
+npx cap open ios
+```
+
+在 Xcode 中：
+1. 在上方工具列找到裝置選擇器（通常顯示模擬器名稱）
+2. 點擊下拉選單
+3. 選擇你的實體裝置（會顯示裝置名稱，例如「CY 的 iPhone」）
+
+##### 步驟 2：設定程式碼簽名
+1. 在左側專案導航器中點擊 `App` 專案（最上方的藍色圖示）
+2. 選擇 `TARGETS` 下的 `App`
+3. 點擊 `Signing & Capabilities` 標籤
+4. 勾選 `✓ Automatically manage signing`
+5. 在 `Team` 下拉選單中選擇你的 Apple ID
+
+> 💡 **提示**：如果沒有看到你的 Apple ID，點擊「Add Account...」來添加
+
+##### 步驟 2.5：處理程式碼簽名密碼請求
+當你第一次設定程式碼簽名時，macOS 會顯示密碼對話框：
+
+**對話框內容**：「codesign 想存取鑰匙圈中的密碼『Apple Development: 振宇 江 (振宇 江)』」
+
+**解決方案**：
+1. **輸入你的 Mac 登入密碼**（不是 Apple ID 密碼）
+2. 建議選擇「**永遠允許**」，這樣之後就不會再跳出
+3. 如果選擇「允許」，每次建構時都會詢問
+4. 點擊「允許」或「永遠允許」
+
+> ⚠️ **重要**：這是正常的安全流程，macOS 在保護你的開發者憑證！
+
+##### 步驟 3：處理 Bundle Identifier
+Xcode 可能會要求你修改 Bundle Identifier，因為 `com.ntpu.capacitor.helloworld` 可能與其他開發者衝突：
+
+```
+建議格式：com.[你的名字].capacitor.helloworld
+例如：com.john.capacitor.helloworld
+```
+
+##### 步驟 4：建構並執行
+1. 點擊 **播放按鈕（▶️）** 或按 `Cmd + R`
+2. 首次安裝可能需要 3-8 分鐘
+3. 應用程式會自動安裝到你的 iPhone 上
+
+##### 步驟 5：在 iPhone/iPad 上信任開發者（重要！）
+**應用程式安裝完成後，你需要在裝置上信任開發者，否則無法開啟 App**
+
+1. **找到應用程式圖示**：
+   - 在 iPhone/iPad 主畫面找到你的應用程式圖示
+   - 圖示可能顯示為 "Capacitor Hello World" 或你設定的名稱
+
+2. **嘗試開啟應用程式**：
+   - 點擊應用程式圖示
+   - 如果是第一次執行，會顯示：**「無法打開 [應用程式名稱]，因為開發者身分無法驗證」**
+
+3. **前往裝置設定**：
+   - 開啟 iPhone/iPad 的 **「設定」**
+   - 滑動找到 **「一般」** → **「VPN 與裝置管理」**
+   - 或搜尋 **「VPN 與裝置管理」**
+
+4. **信任開發者**：
+   - 在 **「開發者 App」** 區域找到你的 Apple ID
+   - 例如：**「Apple Development: 江振宇 (XXXXXXXXXX)」**
+   - 點擊你的開發者憑證
+
+5. **確認信任**：
+   - 點擊 **「信任 [你的 Apple ID]」**
+   - 在彈出的確認對話框中再次點擊 **「信任」**
+
+6. **重新開啟應用程式**：
+   - 回到主畫面
+   - 點擊應用程式圖示
+   - 現在應該可以正常開啟了！
+
+> ⚠️ **重要提醒**：這個步驟只需要執行一次。之後用同一個 Apple ID 開發的所有應用程式都會自動被信任。
+
+#### ⚠️ 常見問題和解決方案
+
+##### 問題 1：「開發者不受信任」錯誤
+**症狀**：應用程式安裝後無法開啟，顯示「無法打開 [應用程式名稱]，因為開發者身分無法驗證」
+
+**這是正常現象！** 所有使用免費 Apple ID 開發的應用程式都需要這個步驟。
+
+**解決方案**：
+1. 在 iPhone/iPad 上前往：**「設定」** → **「一般」** → **「VPN 與裝置管理」**
+2. 在「開發者 App」區域找到你的 Apple ID（例如：Apple Development: 江振宇）
+3. 點擊你的開發者憑證
+4. 點擊 **「信任 [你的 Apple ID]」**
+5. 在確認對話框中再次點擊 **「信任」**
+6. 回到主畫面重新開啟應用程式
+
+> 💡 **小技巧**：如果找不到「VPN 與裝置管理」，可以在設定中搜尋「VPN」或「裝置管理」
+
+##### 問題 2：找不到裝置
+**症狀**：Xcode 裝置列表中沒有顯示你的 iPhone
+
+**解決方案**：
+```bash
+# 1. 檢查裝置連接
+# 在終端機執行：
+xcrun devicectl list devices
+
+# 2. 重新連接裝置
+# 拔掉重插 USB 線
+
+# 3. 重啟 Xcode
+# 完全關閉 Xcode 後重新開啟
+```
+
+##### 問題 2.5：裝置映像檔案錯誤
+**症狀**：「The developer disk image could not be mounted on this device」或「Error mounting image」
+
+**完整錯誤訊息可能包含**：
+```
+kAMDMobileImageMounterPersonalizedBundleMissingVariantError: 
+The bundle image is missing the requested variant for this device.
+```
+
+**原因分析**：
+- Xcode 版本太舊，不支援你的 iOS 版本
+- 缺少對應的開發者磁碟映像檔案
+
+**解決方案**：
+```bash
+# 1. 檢查版本相容性
+xcodebuild -version
+# 在 iPhone：設定 → 一般 → 關於本機 → 軟體版本
+
+# 2. 更新 Xcode
+# 到 Mac App Store 搜尋 "Xcode" 並更新
+
+# 3. 重新連接裝置
+# 拔掉 USB 線，重新插入，在 iPhone 上重新信任電腦
+```
+
+**版本對應參考**：
+- **iOS 18.x** → 需要 **Xcode 16.x** 或更高
+- **iOS 17.x** → 需要 **Xcode 15.x** 或更高  
+- **iOS 16.x** → 需要 **Xcode 14.x** 或更高
+
+**特別注意**：
+- iPhone 16 系列（iOS 18.x）需要 Xcode 16.0 或更新版本
+- 如果你有最新的 iPhone，建議立即更新 Xcode
+
+**臨時解決方案**：如果無法立即更新 Xcode，可以：
+1. 使用 iOS 模擬器進行開發和測試
+2. 降級 iPhone iOS 版本（不建議）
+3. 等待 Xcode 更新後再測試實體裝置
+
+**更新 Xcode 的方法**：
+1. **Mac App Store**（推薦）：
+   - 開啟 Mac App Store
+   - 搜尋 "Xcode"
+   - 點擊 "更新"
+   - 下載大小約 6-8GB，需時 30分鐘-2小時
+
+2. **Apple Developer 網站**：
+   - 訪問 https://developer.apple.com/xcode/
+   - 免費 Apple ID 即可下載
+
+##### 問題 3：程式碼簽名錯誤
+**症狀**：「Signing for "App" requires a development team」
+
+**解決方案**：
+1. 確保已選擇正確的 Team（你的 Apple ID）
+2. 嘗試修改 Bundle Identifier 為唯一值
+3. 清理專案：在 Xcode 中選擇 `Product` → `Clean Build Folder`
+
+##### 問題 3.5：程式碼簽名密碼請求
+**症狀**：出現「codesign 想存取鑰匙圈中的密碼」對話框
+
+**解決方案**：
+1. **這是正常的安全流程！** macOS 在保護你的開發者憑證
+2. 輸入你的 **Mac 登入密碼**（不是 Apple ID 密碼）
+3. 建議選擇「**永遠允許**」：
+   - ✅ 永遠允許：之後不會再詢問
+   - ⚠️ 允許：每次建構都會詢問
+   - ❌ 拒絕：無法進行程式碼簽名
+4. 如果忘記密碼，使用 Mac 的「系統偏好設定」重設
+
+##### 問題 4：安裝失敗或閃退
+**症狀**：應用程式安裝失敗或立即閃退
+
+**解決方案**：
+```bash
+# 1. 檢查 iOS 版本相容性
+# 確保 iPhone 是 iOS 13.0 或更高版本
+
+# 2. 重新建構和同步
+npm run build
+npx cap sync ios
+
+# 3. 在 Xcode 中查看錯誤訊息
+# 查看 Xcode 底部的輸出面板
+```
+
+#### 🔍 除錯和開發者工具
+
+##### 使用 Safari 開發者工具
+1. 在 iPhone 上開啟你的應用程式
+2. 在 Mac 上開啟 Safari
+3. 選單：`開發` → `[你的 iPhone 名稱]` → `[應用程式名稱]`
+4. 現在可以使用完整的網頁開發者工具
+
+##### 查看 Console 輸出
+```bash
+# 在終端機中查看裝置日誌
+xcrun devicectl log stream --device [裝置ID]
+
+# 或使用 Xcode 的 Console
+# Window → Devices and Simulators → 選擇你的裝置 → View Device Logs
+```
+
+#### 🚀 效能優化建議
+
+為了在實體裝置上獲得最佳效能：
+
+1. **使用 Release 建構**：
+   - 在 Xcode 中：`Product` → `Scheme` → `Edit Scheme`
+   - 將 `Build Configuration` 改為 `Release`
+
+2. **最佳化資源**：
+   - 壓縮圖片
+   - 最小化 CSS 和 JavaScript
+   - 使用 WebP 格式圖片
+
+3. **測試不同網路狀況**：
+   - 測試 WiFi 和 4G/5G 環境
+   - 模擬慢速網路條件
+
+#### 💡 實用技巧
+
+1. **快速重新載入**：
+   ```bash
+   # 修改程式碼後快速同步
+   npm run build && npx cap sync ios
+   ```
+
+2. **保持裝置喚醒**：
+   - 在開發期間，建議在 iPhone 設定中延長自動鎖定時間
+
+3. **使用 Wireless 除錯**（iOS 16+）：
+   - 在 Xcode 中啟用無線除錯，之後可以不用 USB 線
+
+4. **多裝置測試**：
+   - 如果有多台裝置，可以同時連接測試不同尺寸螢幕
 
 ### 🔄 開發工作流程
 
