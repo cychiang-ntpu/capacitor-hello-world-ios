@@ -43,15 +43,45 @@ npm install
 
 ## ⚡ 步驟 3：運行應用程式 (10分鐘)
 
+### 🌐 在瀏覽器中運行 (四種方法)
+
+#### 方法 1：npm 腳本 (推薦)
+
 ```bash
-# 建置專案
-npm run build
+npm run build    # 建置專案
+npm run serve    # 啟動伺服器
+```
+然後打開瀏覽器前往 `http://localhost:8080`
 
-# 同步到 iOS
-npm run sync:ios
+#### 方法 2：直接開啟 HTML 檔案 (最快)
 
-# 開啟 Xcode
-open ios/App/App.xcworkspace
+```bash
+open index.html  # macOS
+# 或直接雙擊 index.html 檔案
+```
+
+#### 方法 3：Python 伺服器 (跨平台)
+
+```bash
+python3 -m http.server 8080
+```
+然後前往 `http://localhost:8080`
+
+#### 方法 4：其他 Node.js 工具
+
+```bash
+npx http-server . -p 8080
+# 或使用 VS Code Live Server 擴充功能
+```
+
+### 📱 在 iOS 模擬器運行 (完整體驗)
+
+如果你想要完整的手機體驗：
+
+```bash
+npm run build        # 建置專案
+npm run sync:ios     # 同步到 iOS
+open ios/App/App.xcworkspace  # 開啟 Xcode
 ```
 
 ## ⚡ 步驟 4：在模擬器測試 (5分鐘)

@@ -117,6 +117,42 @@ npm install
 
 ### 3. 運行應用程式
 
+#### 🌐 選項 A：在瀏覽器中快速測試 (推薦新手)
+
+如果你想快速看到應用程式效果，不需要安裝 Xcode，可以直接在瀏覽器中運行：
+
+```bash
+# 建立應用程式檔案
+npm run build
+
+# 啟動本地伺服器
+npm run serve
+```
+
+**成功後會顯示：**
+```
+Starting up http-server, serving dist
+Available on:
+  http://127.0.0.1:8080
+  http://你的IP:8080
+Hit CTRL-C to stop the server
+```
+
+**然後：**
+1. 打開你的瀏覽器 (Chrome、Safari、Firefox 都可以)
+2. 前往 `http://localhost:8080`
+3. 🎉 你就能看到 Welcome App 運行了！
+
+**瀏覽器測試的優點：**
+- ⚡ **超快速** - 不需要等待 Xcode 和模擬器
+- 🔧 **容易除錯** - 可以使用瀏覽器的開發者工具
+- 💻 **跨平台** - 在任何作業系統都能運行
+- 🔄 **即時更新** - 修改程式碼後重新整理即可看到變化
+
+#### 📱 選項 B：在 iOS 模擬器中測試 (完整體驗)
+
+如果你想體驗真正的手機應用程式效果：
+
 ```bash
 # 建立應用程式檔案
 npm run build
@@ -188,6 +224,240 @@ Welcome App
 | `app-state.js` | 管理用戶狀態和登入邏輯 | 🧠 記憶大腦 |
 | `page-renderer.js` | 繪製不同頁面的內容 | 🎨 專業畫家 |
 | `form-validators.js` | 檢查用戶輸入是否正確 | ✅ 品質檢查員 |
+
+## 🌐 本地開發環境設定
+
+> 💡 **重要**: 開發 Web 應用程式時，本地瀏覽器測試是最快最方便的方式！
+
+### 🚀 快速開始本地開發
+
+#### 步驟 1：準備專案
+
+```bash
+# 確保你在專案資料夾中
+cd capacitor-hello-world-ios
+
+# 安裝依賴 (如果還沒安裝)
+npm install
+```
+
+#### 步驟 2：啟動開發環境
+
+Welcome App 提供了多種本地開發方式：
+
+##### 🎯 方法一：使用 npm 腳本 (推薦)
+
+```bash
+# 一鍵啟動開發伺服器
+npm run dev
+
+# 或者分步執行
+npm run build  # 建置專案
+npm run serve  # 啟動伺服器
+```
+
+**優點：**
+- ✅ 最簡單快速
+- ✅ 自動處理建置
+- ✅ 使用專案配置的伺服器
+
+**成功後會顯示：**
+```
+Starting up http-server, serving dist
+Available on:
+  http://127.0.0.1:8080
+  http://你的IP:8080
+Hit CTRL-C to stop the server
+```
+
+##### 🎯 方法二：直接開啟 HTML 檔案 (超快速)
+
+```bash
+# macOS - 使用預設瀏覽器開啟
+open index.html
+
+# Windows
+start index.html
+
+# Linux
+xdg-open index.html
+
+# 或者直接雙擊 index.html 檔案
+```
+
+**優點：**
+- ⚡ 瞬間開啟，無需等待
+- 💻 不需要額外安裝任何工具
+- 🔧 適合快速檢查和除錯
+
+**注意事項：**
+- ⚠️ 某些瀏覽器可能限制 `file://` 協議的功能
+- ⚠️ localStorage 可能無法正常運作
+- ⚠️ 如果遇到問題，建議使用其他方法
+
+##### 🎯 方法三：使用 Python 內建伺服器 (跨平台)
+
+```bash
+# Python 3 (推薦)
+python3 -m http.server 8080
+
+# Python 2 (較舊系統)
+python -m SimpleHTTPServer 8080
+
+# 指定特定目錄
+python3 -m http.server 8080 --directory .
+```
+
+**優點：**
+- 🐍 大部分系統都有 Python
+- 🌐 標準的 HTTP 伺服器
+- 📁 可以指定任何目錄
+
+**使用步驟：**
+1. 在終端機執行上述指令
+2. 開啟瀏覽器前往 `http://localhost:8080`
+3. 按 `Ctrl+C` 停止伺服器
+
+##### 🎯 方法四：使用其他 Node.js 工具
+
+```bash
+# 使用 npx (無需全域安裝)
+npx http-server . -p 8080
+
+# 使用 npx serve (另一個選擇)
+npx serve . -l 8080
+
+# 如果你有全域安裝 http-server
+npm install -g http-server
+http-server . -p 8080
+
+# 使用 VS Code Live Server 擴充功能
+# 1. 在 VS Code 中安裝 "Live Server" 擴充功能
+# 2. 右鍵點擊 index.html → "Open with Live Server"
+```
+
+**優點：**
+- 🚀 專業的開發伺服器
+- 🔄 自動重新載入 (Live Server)
+- ⚙️ 更多配置選項
+
+**VS Code Live Server 特色：**
+- 🔄 **自動重新載入** - 修改檔案後自動刷新瀏覽器
+- 📱 **行動裝置同步** - 在同一網路的手機也能測試
+- 🎯 **零配置** - 右鍵即可啟動
+
+### 🆚 方法比較表
+
+| 方法 | 速度 | 簡易度 | 功能完整度 | 適用場景 |
+|------|------|--------|------------|----------|
+| **npm run dev** | ⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | 正式開發 |
+| **直接開啟 HTML** | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐ | 快速預覽 |
+| **Python 伺服器** | ⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐⭐ | 跨平台開發 |
+| **Node.js 工具** | ⭐⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐⭐⭐ | 專業開發 |
+
+### 💡 選擇建議
+
+- 🆕 **新手首次嘗試** → 方法二 (直接開啟 HTML)
+- 🚀 **正式開發** → 方法一 (npm run dev)
+- 🐍 **沒有 Node.js 環境** → 方法三 (Python 伺服器)
+- 💻 **使用 VS Code** → 方法四 (Live Server)
+
+### 📱 本地開發的優勢
+
+#### ⚡ 快速迭代
+- **即時預覽** - 修改程式碼後重新整理瀏覽器即可看到變化
+- **無需等待** - 不用等待 Xcode 編譯和模擬器啟動
+- **跨平台** - 在任何作業系統都能開發
+
+#### 🔧 強大的除錯工具
+- **瀏覽器開發者工具** - 按 F12 開啟
+- **Console 除錯** - 查看 `console.log()` 輸出
+- **網路監控** - 檢查 API 請求和回應
+- **即時編輯** - 直接在瀏覽器修改 CSS 和 JavaScript
+
+#### 🧪 測試不同場景
+- **響應式測試** - 調整瀏覽器視窗大小模擬不同裝置
+- **行動裝置模擬** - 使用瀏覽器的裝置模擬功能
+- **離線測試** - 測試網路中斷時的應用程式行為
+
+### 🎨 本地開發工作流程
+
+#### 典型的開發循環：
+
+```bash
+# 1. 啟動開發伺服器
+npm run dev
+
+# 2. 開啟瀏覽器前往 http://localhost:8080
+
+# 3. 開啟你喜歡的程式碼編輯器 (VS Code, Sublime, etc.)
+
+# 4. 修改程式碼
+# 編輯 js/app.js, js/app-state.js 等檔案
+
+# 5. 在瀏覽器重新整理查看變化
+
+# 6. 使用瀏覽器開發者工具除錯
+# 按 F12 → Console 標籤查看錯誤和日誌
+
+# 7. 滿意後提交變更
+git add .
+git commit -m "你的變更描述"
+```
+
+### 🔍 瀏覽器開發者工具使用技巧
+
+#### 🚨 Console 除錯
+```javascript
+// 在程式碼中加入除錯資訊
+console.log('用戶註冊資料:', userData);
+console.error('註冊失敗:', error);
+console.warn('密碼強度不足');
+
+// 檢查變數值
+console.log('AppState.currentUser:', AppState.currentUser);
+console.log('所有用戶:', AppState.users);
+```
+
+#### 📱 裝置模擬
+1. 按 F12 開啟開發者工具
+2. 點擊裝置圖示 📱 (Toggle device toolbar)
+3. 選擇不同的裝置尺寸測試響應式設計
+
+#### 🔍 元素檢查
+1. 右鍵點擊頁面元素 → "檢查元素"
+2. 即時修改 CSS 樣式
+3. 查看元素的 DOM 結構
+
+### ⚠️ 本地開發注意事項
+
+#### 🔐 安全限制
+- **CORS 問題** - 直接開啟 HTML 檔案可能會有跨域限制
+- **localStorage** - 某些瀏覽器在 `file://` 協議下可能不支援
+- **解決方案** - 使用 HTTP 伺服器 (`npm run serve`) 而非直接開啟檔案
+
+#### 📱 與真實手機的差異
+- **觸控體驗** - 滑鼠點擊與手指觸控不同
+- **性能表現** - 電腦通常比手機快很多
+- **原生功能** - 瀏覽器無法使用相機、GPS 等原生功能
+- **最終測試** - 開發完成後還是要在真實裝置測試
+
+### 🔄 從瀏覽器到手機應用
+
+當你在瀏覽器中完成開發和測試後，轉換到手機應用非常簡單：
+
+```bash
+# 1. 建置專案
+npm run build
+
+# 2. 同步到 iOS 平台
+npm run sync:ios
+
+# 3. 在 Xcode 中開啟並運行
+npm run open:ios
+```
+
+這就是 Capacitor 的魅力 - **同一套程式碼，瀏覽器和手機都能運行！**
 
 ## 📝 從零開始建立 Welcome App
 
