@@ -1,4 +1,4 @@
-name: Build and Test
+name: Welcome App - Build and Test
 
 on:
   push:
@@ -8,6 +8,7 @@ on:
 
 jobs:
   build-web:
+    name: Build Web Application
     runs-on: ubuntu-latest
     
     steps:
@@ -22,16 +23,27 @@ jobs:
     - name: Install dependencies
       run: npm ci
     
-    - name: Build web assets
+    - name: Build Welcome App web assets
       run: npm run build
+    
+    - name: Validate JavaScript modules
+      run: |
+        echo "Checking JavaScript module structure..."
+        ls -la js/
+        echo "Validating core modules exist..."
+        test -f js/app.js
+        test -f js/app-state.js  
+        test -f js/page-renderer.js
+        test -f js/form-validators.js
     
     - name: Upload web build artifacts
       uses: actions/upload-artifact@v4
       with:
-        name: web-build
+        name: welcome-app-web-build
         path: dist/
 
   build-ios:
+    name: Build iOS Application
     runs-on: macos-latest
     needs: build-web
     
@@ -47,18 +59,20 @@ jobs:
     - name: Download web build artifacts
       uses: actions/download-artifact@v4
       with:
-        name: web-build
+        name: welcome-app-web-build
         path: dist/
     
     - name: Install dependencies
       run: npm ci
     
-    - name: Setup iOS
+    - name: Setup iOS platform
       run: |
+        echo "Setting up Welcome App iOS platform..."
         npx cap add ios
         npx cap sync ios
     
-    - name: Build iOS app
+    - name: Build Welcome App for iOS
       run: |
         cd ios/App
+        echo "Building Welcome App iOS target..."
         xcodebuild -workspace App.xcworkspace -scheme App -configuration Debug -sdk iphonesimulator -derivedDataPath build/ build

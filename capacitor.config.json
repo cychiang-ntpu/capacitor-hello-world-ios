@@ -1,11 +1,11 @@
 {
-  "appId": "com.ntpu.capacitor.helloworld",
-  "appName": "Capacitor Hello World",
+  "appId": "com.ntpu.welcomeapp",
+  "appName": "Welcome App",
   "webDir": "dist",
   "server": {
     "androidScheme": "https"
   },
   "ios": {
-    "scheme": "Capacitor Hello World"
+    "scheme": "Welcome App"
   }
 }

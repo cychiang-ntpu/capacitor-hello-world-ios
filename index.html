@@ -1,132 +1,509 @@
 <!DOCTYPE html>
-<!-- 📱 Capacitor Hello World iOS 應用程式 -->
-<!-- 這是一個使用網頁技術建立的 iOS 應用程式 -->
+<!-- 📱 Welcome App - 完整的使用者註冊登入應用程式 -->
+<!-- 使用 Capacitor 技術建立的跨平台 iOS 應用程式 -->
 <html lang="zh-tw">
 <head>
     <!-- 📝 HTML 文件的基本設定 -->
     <meta charset="UTF-8">
     <!-- 📱 讓應用程式在手機上正確顯示，啟用響應式設計 -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- 📋 應用程式標題，會顯示在瀏覽器標籤或 iOS 應用程式標題 -->
-    <title>Hello World - iOS App</title>
+    <!-- 📋 應用程式標題 -->
+    <title>Welcome App - 你的專屬應用程式</title>
     
-    <!-- 🎨 CSS 樣式設定 - 讓應用程式變得美觀 -->
+    <!-- 🎨 CSS 樣式設定 - 完整的應用程式樣式 -->
     <style>
-        /* 🌐 網頁整體樣式設定 */
-        body {
-            /* 📝 使用系統預設字體，在 iOS 上會顯示 Apple 的 San Francisco 字體 */
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            /* 🚫 移除瀏覽器預設的邊距和內距 */
+        /* 🌐 基本重置和全域樣式 */
+        * {
             margin: 0;
             padding: 0;
-            /* 🌈 設定漂亮的漸層背景色彩 */
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            /* 📏 讓背景高度填滿整個螢幕 */
-            height: 100vh;
-            /* 📱 使用 Flexbox 讓內容在螢幕中央顯示 */
-            display: flex;
-            justify-content: center;  /* 水平置中 */
-            align-items: center;      /* 垂直置中 */
-            /* ✏️ 設定文字顏色為白色 */
-            color: white;
+            box-sizing: border-box;
         }
         
-        /* 📦 主要內容容器的樣式 */
-        .container {
-            /* 📝 讓文字置中對齊 */
-            text-align: center;
-            /* 📏 在容器內側加上內距，讓內容不會貼邊 */
-            padding: 2rem;  /* 2rem = 32px */
-            /* 🔍 半透明白色背景，產生毛玻璃效果 */
-            background: rgba(255, 255, 255, 0.1);
-            /* 🔄 圓角邊框，讓容器看起來更現代 */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+            overflow-x: hidden;
+        }
+        
+        /* 📦 主要應用程式容器 */
+        #app {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .page-container {
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        
+        /* 🔐 認證頁面樣式 (註冊/登入) */
+        .auth-container {
+            background: rgba(255, 255, 255, 0.95);
             border-radius: 20px;
-            /* ✨ 背景模糊效果，產生 iOS 風格的毛玻璃效果 */
+            padding: 40px 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
             backdrop-filter: blur(10px);
-            /* 🌟 陰影效果，讓容器有立體感 */
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-            /* 🔳 淡色邊框，增加視覺層次 */
             border: 1px solid rgba(255, 255, 255, 0.2);
         }
         
-        /* 🔤 主標題樣式 */
-        h1 {
-            /* 📏 大字體尺寸，讓標題顯眼 */
-            font-size: 3rem;  /* 3rem = 48px */
-            /* 📐 在標題下方加上間距 */
-            margin-bottom: 1rem;  /* 1rem = 16px */
-            /* ✨ 文字陰影效果，讓文字更有立體感 */
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        .auth-header {
+            text-align: center;
+            margin-bottom: 30px;
         }
         
-        /* 📝 段落文字樣式 */
-        p {
-            /* 📏 適中的字體大小，方便閱讀 */
-            font-size: 1.2rem;  /* 1.2rem = 19.2px */
-            /* 📐 在段落下方加上間距 */
-            margin-bottom: 2rem;  /* 2rem = 32px */
-            /* 👻 稍微降低透明度，產生層次感 */
-            opacity: 0.9;
+        .app-logo {
+            margin-bottom: 20px;
         }
         
-        /* 😊 Emoji 表情符號樣式 */
-        .emoji {
-            /* 📏 很大的字體，讓 emoji 成為視覺焦點 */
-            font-size: 4rem;  /* 4rem = 64px */
-            /* 📐 在 emoji 下方加上間距 */
-            margin-bottom: 1rem;  /* 1rem = 16px */
-            /* 📦 讓 emoji 獨占一行顯示 */
+        .logo-emoji {
+            font-size: 3rem;
             display: block;
+            margin-bottom: 10px;
         }
         
-        /* 🔘 互動按鈕的樣式 */
-        .button {
-            /* 🔍 半透明白色背景 */
-            background: rgba(255, 255, 255, 0.2);
-            /* 🔳 半透明白色邊框 */
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            /* ✏️ 白色文字 */
-            color: white;
-            /* 📏 按鈕內側間距：上下12px，左右24px */
-            padding: 12px 24px;
-            /* 🔄 圓角按鈕，看起來更現代 */
-            border-radius: 25px;
-            /* 📝 按鈕文字大小 */
-            font-size: 1rem;  /* 1rem = 16px */
-            /* 👆 滑鼠指標變成手指，表示可以點擊 */
+        .app-logo h1 {
+            font-size: 2rem;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        
+        .auth-subtitle {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        /* 📝 表單樣式 */
+        .auth-form {
+            width: 100%;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+            font-size: 0.9rem;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e1e1e1;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: #fff;
+        }
+        
+        .form-group input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        
+        .password-input-container {
+            position: relative;
+        }
+        
+        .toggle-password {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            font-size: 1.2rem;
             cursor: pointer;
-            /* ✨ 平滑的動畫效果，當按鈕狀態改變時 */
+            padding: 4px;
+        }
+        
+        /* 🎯 密碼強度指示器 */
+        .password-strength {
+            margin-top: 5px;
+            padding: 5px 8px;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            text-align: center;
+            font-weight: 600;
+        }
+        
+        .password-strength.weak {
+            background: #ffebee;
+            color: #c62828;
+        }
+        
+        .password-strength.medium {
+            background: #fff3e0;
+            color: #ef6c00;
+        }
+        
+        .password-strength.strong {
+            background: #e8f5e8;
+            color: #2e7d32;
+        }
+        
+        /* ✅ 錯誤訊息 */
+        .error-message {
+            color: #e53e3e;
+            font-size: 0.8rem;
+            margin-top: 5px;
+            display: none;
+        }
+        
+        /* ☑️ 複選框樣式 */
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+        }
+        
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+        
+        .checkbox-label input[type="checkbox"] {
+            width: auto;
+            margin-right: 8px;
+        }
+        
+        /* 🔘 按鈕樣式 */
+        .auth-button {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 20px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .auth-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+        
+        .auth-button:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .loading-spinner {
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-top: 2px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* 🔗 連結樣式 */
+        .auth-footer {
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        .auth-footer p {
+            margin-bottom: 10px;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .auth-link {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        .auth-link:hover {
+            text-decoration: underline;
+        }
+        
+        .forgot-password {
+            color: #999;
+            text-decoration: none;
+            font-size: 0.8rem;
+        }
+        
+        /* 🏠 主頁面樣式 */
+        .main-container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            max-width: 800px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        
+        .main-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .user-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .user-details h2 {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+        }
+        
+        .user-email {
+            opacity: 0.9;
+            font-size: 0.9rem;
+        }
+        
+        .last-login {
+            opacity: 0.7;
+            font-size: 0.8rem;
+        }
+        
+        .logout-button {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
             transition: all 0.3s ease;
         }
         
-        /* 🖱️ 滑鼠懸停時的按鈕效果（在手機上是觸碰效果） */
-        .button:hover {
-            /* 🔍 背景變得更不透明 */
+        .logout-button:hover {
             background: rgba(255, 255, 255, 0.3);
-            /* ⬆️ 按鈕向上移動2px，產生「浮起」的效果 */
-            transform: translateY(-2px);
+        }
+        
+        /* 📊 主內容區域 */
+        .main-content {
+            padding: 30px;
+        }
+        
+        .dashboard h3 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        
+        .feature-card {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            border-color: #667eea;
+        }
+        
+        .feature-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+        
+        .feature-card h4 {
+            color: #333;
+            margin-bottom: 8px;
+            font-size: 1rem;
+        }
+        
+        .feature-card p {
+            color: #666;
+            font-size: 0.8rem;
+            line-height: 1.4;
+        }
+        
+        /* 📈 統計區域 */
+        .stats-section {
+            margin-top: 30px;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+        
+        .stat-item {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            font-size: 0.8rem;
+            opacity: 0.9;
+        }
+        
+        /* 🔔 通知樣式 */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 20px;
+            border-radius: 10px;
+            color: white;
+            font-weight: 600;
+            transform: translateX(400px);
+            transition: transform 0.3s ease;
+            z-index: 1000;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .notification.show {
+            transform: translateX(0);
+        }
+        
+        .notification.success {
+            background: #48bb78;
+        }
+        
+        .notification.error {
+            background: #f56565;
+        }
+        
+        .notification.info {
+            background: #4299e1;
+        }
+        
+        /* 📱 響應式設計 */
+        @media (max-width: 768px) {
+            #app {
+                padding: 10px;
+            }
+            
+            .auth-container {
+                padding: 30px 20px;
+            }
+            
+            .main-container {
+                max-height: 95vh;
+            }
+            
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .user-info {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .feature-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .auth-container {
+                padding: 20px 15px;
+            }
+        }
+        
+        /* ✨ 載入動畫 */
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
 <body>
-    <!-- 📱 應用程式的主要內容區域 -->
-    <div class="container">
-        <!-- 😊 顯示一個手勢 emoji，增加親和力 -->
-        <span class="emoji">👋</span>
-        
-        <!-- 🔤 應用程式的主標題 -->
-        <h1>Hello World!</h1>
-        
-        <!-- 📝 歡迎訊息，告訴用戶這是什麼應用程式 -->
-        <p>歡迎使用 Capacitor iOS 應用程式</p>
-        
-        <!-- 🔘 互動按鈕，點擊後會執行 JavaScript 函數 showAlert() -->
-        <!-- onclick 是事件處理器，當用戶點擊按鈕時會執行指定的函數 -->
-        <button class="button" onclick="showAlert()">點我打招呼</button>
+    <!-- 📱 主要應用程式容器 -->
+    <div id="app">
+        <!-- � 載入中顯示 -->
+        <div class="loading-container">
+            <div class="logo-emoji">🚀</div>
+            <h2>Welcome App</h2>
+            <p>正在載入中...</p>
+        </div>
     </div>
 
-    <!-- 📜 載入 JavaScript 檔案，包含應用程式的互動邏輯 -->
-    <!-- 這個腳本檔案定義了 showAlert() 函數和其他互動功能 -->
+    <!-- � 載入 JavaScript 檔案，包含應用程式的完整邏輯 -->
+    <script src="js/form-validators.js"></script>
+    <script src="js/app-state.js"></script>
+    <script src="js/page-renderer.js"></script>
     <script src="js/app.js"></script>
 </body>
 </html>

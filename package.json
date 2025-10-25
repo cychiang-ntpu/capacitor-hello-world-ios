@@ -1,7 +1,7 @@
 {
-  "name": "capacitor-hello-world-ios",
-  "version": "1.0.0",
-  "description": "A simple Hello World app using Capacitor for iOS - 使用 Capacitor 技術將網頁應用程式打包成原生 iOS 應用程式的完整教學專案",
+  "name": "welcome-app-ios",
+  "version": "2.0.0",
+  "description": "一個完整的使用者註冊登入應用程式 - 使用 Capacitor 技術將網頁應用程式打包成原生 iOS 應用程式，包含註冊、登入、主頁面功能",
   "main": "index.html",
   "homepage": "https://github.com/cychiang-ntpu/capacitor-hello-world-ios",
   "repository": {
@@ -28,14 +28,21 @@
     "ios",
     "mobile",
     "app",
-    "tutorial",
-    "hello-world",
+    "registration",
+    "login",
+    "authentication",
+    "single-page-app",
+    "spa",
+    "user-management",
     "hybrid-app",
     "cross-platform",
     "web-to-native",
     "ionic",
+    "welcome-app",
     "教學",
-    "範例"
+    "範例",
+    "註冊",
+    "登入"
   ],
   "author": {
     "name": "CY Chiang",
