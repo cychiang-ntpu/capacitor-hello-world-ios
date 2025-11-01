@@ -322,14 +322,13 @@ python3 -m http.server 8080
 **錯誤訊息：** `Address already in use` 或 `EADDRINUSE`
 
 **解決方法：**
+
 ```bash
 # 檢查哪個程式占用埠口
-lsof -i :8080  # macOS/Linux
-netstat -ano | findstr :8080  # Windows
+lsof -i :8080
 
 # 使用不同埠口
-npm run serve -- -p 8081
-python3 -m http.server 8081
+npx http-server dist -p 3000
 ```
 
 ### 常見問題 4：跨域 (CORS) 錯誤

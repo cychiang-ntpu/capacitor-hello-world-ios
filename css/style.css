@@ -1,0 +1,383 @@
+/* 🎨 Welcome App - 簡化樣式表 */
+/* 移除複雜動畫和響應式設計的簡潔版本 */
+
+/* 🌐 基本重置和全域樣式 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    background: #f5f5f5;
+    min-height: 100vh;
+    color: #333;
+}
+
+/* 📦 主要應用程式容器 */
+#app {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.page-container {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+/* 🔐 認證頁面樣式 (註冊/登入) */
+.auth-container {
+    background: white;
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.auth-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.app-logo {
+    margin-bottom: 20px;
+}
+
+.logo-emoji {
+    font-size: 3rem;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.app-logo h1 {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.auth-subtitle {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+/* 📝 表單樣式 */
+.auth-form {
+    width: 100%;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #333;
+    font-size: 0.9rem;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    background: #fff;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #007AFF;
+}
+
+.password-input-container {
+    position: relative;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 4px;
+}
+
+/* 🎯 密碼強度指示器 */
+.password-strength {
+    margin-top: 5px;
+    padding: 5px 8px;
+    border-radius: 5px;
+    font-size: 0.8rem;
+    text-align: center;
+    font-weight: 600;
+}
+
+.password-strength.weak {
+    background: #ffebee;
+    color: #c62828;
+}
+
+.password-strength.medium {
+    background: #fff3e0;
+    color: #ef6c00;
+}
+
+.password-strength.strong {
+    background: #e8f5e8;
+    color: #2e7d32;
+}
+
+/* ✅ 錯誤訊息 */
+.error-message {
+    color: #e53e3e;
+    font-size: 0.8rem;
+    margin-top: 5px;
+    display: none;
+}
+
+/* ☑️ 複選框樣式 */
+.checkbox-group {
+    display: flex;
+    align-items: center;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.checkbox-label input[type="checkbox"] {
+    width: auto;
+    margin-right: 8px;
+}
+
+/* 🔘 按鈕樣式 */
+.auth-button {
+    width: 100%;
+    padding: 15px;
+    background: #007AFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin: 20px 0;
+}
+
+.auth-button:hover {
+    background: #0056CC;
+}
+
+.auth-button:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.loading-spinner {
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top: 2px solid white;
+    border-radius: 50%;
+}
+
+/* 🔗 連結樣式 */
+.auth-footer {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.auth-footer p {
+    margin-bottom: 10px;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.auth-link {
+    color: #007AFF;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.auth-link:hover {
+    text-decoration: underline;
+}
+
+.forgot-password {
+    color: #999;
+    text-decoration: none;
+    font-size: 0.8rem;
+}
+
+/* 🏠 主頁面樣式 */
+.main-container {
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    width: 100%;
+}
+
+.main-header {
+    background: #007AFF;
+    color: white;
+    padding: 30px;
+    text-align: center;
+}
+
+.user-info {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.user-avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: #ddd;
+    margin: 0 auto 10px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    line-height: 60px;
+    text-align: center;
+}
+
+.user-details h2 {
+    font-size: 1.5rem;
+    margin-bottom: 5px;
+}
+
+.user-email {
+    opacity: 0.9;
+    font-size: 0.9rem;
+}
+
+.last-login {
+    opacity: 0.7;
+    font-size: 0.8rem;
+}
+
+.logout-button {
+    background: #666;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.logout-button:hover {
+    background: #555;
+}
+
+/* 📊 主內容區域 */
+.main-content {
+    padding: 30px;
+}
+
+.dashboard h3 {
+    color: #333;
+    margin-bottom: 20px;
+    font-size: 1.3rem;
+}
+
+.feature-grid {
+    display: block;
+    margin-bottom: 40px;
+}
+
+.feature-card {
+    background: #f8f9fa;
+    border-radius: 5px;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.feature-card:hover {
+    background: #e9ecef;
+}
+
+.feature-icon {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.feature-card h4 {
+    color: #333;
+    margin-bottom: 8px;
+    font-size: 1rem;
+}
+
+.feature-card p {
+    color: #666;
+    font-size: 0.8rem;
+    line-height: 1.4;
+}
+
+/* 📈 統計區域 */
+.stats-section {
+    margin-top: 30px;
+}
+
+.stats-grid {
+    display: block;
+}
+
+.stat-item {
+    background: #007AFF;
+    color: white;
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.stat-number {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.stat-label {
+    font-size: 0.8rem;
+    opacity: 0.9;
+}
+
+/* 🔔 通知樣式 */
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 15px 20px;
+    border-radius: 5px;
+    color: white;
+    font-weight: 600;
+    z-index: 1000;
+}
+
+.notification.success {
+    background: #48bb78;
+}
+
+.notification.error {
+    background: #f56565;
+}
+
+.notification.info {
+    background: #4299e1;
+}
