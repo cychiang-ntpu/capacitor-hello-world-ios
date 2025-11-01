@@ -1,7 +1,7 @@
-/* 🎨 Welcome App - 簡化樣式表 */
+/* /* Welcome App - 簡化樣式表 */
 /* 移除複雜動畫和響應式設計的簡潔版本 */
 
-/* 🌐 基本重置和全域樣式 */
+/* /* 基本重置和全域樣式 */
 * {
     margin: 0;
     padding: 0;
@@ -15,7 +15,7 @@ body {
     color: #333;
 }
 
-/* 📦 主要應用程式容器 */
+/* /* 主要應用程式容器 */
 #app {
     min-height: 100vh;
     display: flex;
@@ -64,7 +64,7 @@ body {
     font-size: 0.9rem;
 }
 
-/* 📝 表單樣式 */
+/* /* 表單樣式 */
 .auth-form {
     width: 100%;
 }
@@ -111,7 +111,7 @@ body {
     padding: 4px;
 }
 
-/* 🎯 密碼強度指示器 */
+/* /* 密碼強度指示器 */
 .password-strength {
     margin-top: 5px;
     padding: 5px 8px;
@@ -136,7 +136,7 @@ body {
     color: #2e7d32;
 }
 
-/* ✅ 錯誤訊息 */
+/* /* 錯誤訊息 */
 .error-message {
     color: #e53e3e;
     font-size: 0.8rem;
@@ -144,7 +144,7 @@ body {
     display: none;
 }
 
-/* ☑️ 複選框樣式 */
+/* /* 複選框樣式 */
 .checkbox-group {
     display: flex;
     align-items: center;
@@ -162,7 +162,7 @@ body {
     margin-right: 8px;
 }
 
-/* 🔘 按鈕樣式 */
+/* /* 按鈕樣式 */
 .auth-button {
     width: 100%;
     padding: 15px;
@@ -193,7 +193,7 @@ body {
     border-radius: 50%;
 }
 
-/* 🔗 連結樣式 */
+/* /* 連結樣式 */
 .auth-footer {
     text-align: center;
     margin-top: 20px;
@@ -221,7 +221,7 @@ body {
     font-size: 0.8rem;
 }
 
-/* 🏠 主頁面樣式 */
+/* /* 主頁面樣式 */
 .main-container {
     background: white;
     border-radius: 10px;
@@ -283,7 +283,7 @@ body {
     background: #555;
 }
 
-/* 📊 主內容區域 */
+/* /* 主內容區域 */
 .main-content {
     padding: 30px;
 }
@@ -329,7 +329,7 @@ body {
     line-height: 1.4;
 }
 
-/* 📈 統計區域 */
+/* /* 統計區域 */
 .stats-section {
     margin-top: 30px;
 }
@@ -358,7 +358,7 @@ body {
     opacity: 0.9;
 }
 
-/* 🔔 通知樣式 */
+/* /* 通知樣式 */
 .notification {
     position: fixed;
     top: 20px;

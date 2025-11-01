@@ -1,8 +1,8 @@
 # 快速開始指南
 
-> 🎯 **目標**: 在 15 分鐘內運行 Welcome App  
-> 📱 **平台**: Web + iOS  
-> 🔧 **難度**: 初級
+> **目標**: 在 15 分鐘內運行 Welcome App  
+> **平台**: Web + iOS  
+> **難度**: 初級
 
 ## 快速運行（5 分鐘）
 
@@ -21,17 +21,72 @@ npm run build
 npm run serve
 ```
 
-🌐 **在瀏覽器中打開**: `http://localhost:8080`
+**在瀏覽器中打開**: `http://localhost:8080`
 
 ### 方法二：iOS 模擬器運行
 
 ```bash
 # 完成上述步驟後
+
+# 選項 A: 一鍵完成 (推薦新手)
+npm run first:ios
+
+# 選項 B: 分步執行
+# 1. 添加 iOS 平台 (首次運行必須)
+npm run setup:ios
+
+# 2. 建置 iOS 版本
 npm run build:ios
+
+# 3. 開啟 Xcode
 npm run open:ios
 ```
 
-📱 **在 Xcode 中**: 選擇模擬器並點擊運行按鈕
+**在 Xcode 中**: 選擇模擬器並點擊運行按鈕
+
+## 可用的 npm 指令
+
+### 基礎指令
+
+- `npm run build` - 建置 Web 版本到 dist/ 資料夾
+- `npm run serve` - 啟動本地開發服務器 (port 8080)
+- `npm run dev` - 等同於 `npm run serve`
+- `npm run clean` - 清除所有建置檔案和依賴
+
+### iOS 相關指令
+
+#### 新手推薦
+
+- `npm run first:ios` - **一鍵設置** - 建置 + 添加 iOS 平台 + 開啟 Xcode
+
+#### 分步執行
+
+- `npm run setup:ios` - 添加 iOS 平台 (等同於 `npx cap add ios`)
+- `npm run build:ios` - 建置並同步到 iOS
+- `npm run open:ios` - 在 Xcode 中開啟 iOS 專案
+
+#### 進階指令
+
+- `npm run sync:ios` - 只同步代碼到 iOS (不重新建置)
+- `npm run ensure:ios` - 檢查並確保 iOS 平台存在
+- `npm run reset:ios` - 完全重置 iOS 專案
+- `npm run copy` - 複製 Web 資源到原生平台
+
+### 建議工作流程
+
+#### 首次使用者
+
+```bash
+npm install          # 安裝依賴
+npm run first:ios    # 一鍵完成 iOS 設置
+```
+
+#### 日常開發
+
+```bash
+npm run build:ios    # 建置並更新 iOS
+npm run open:ios     # 在 Xcode 中測試
+```
 
 ## 完整安裝指南
 
@@ -91,7 +146,7 @@ cp .env.example .env
 # 修改 APP_NAME、PORT 等設定
 ```
 
-> 💡 **提示**: 首次使用建議跳過此步驟，使用預設設定即可
+> **提示**: 首次使用建議跳過此步驟，使用預設設定即可
 
 #### 3. 建置專案
 
@@ -124,12 +179,26 @@ Available on:
 # 首次安裝 Capacitor CLI (如果需要)
 npm install -g @capacitor/cli
 
+# 選項 A: 一鍵設置 (推薦)
+npm run first:ios
+
+# 選項 B: 分步執行
+# 添加 iOS 平台 (首次必須執行)
+npm run setup:ios
+
 # 同步到 iOS
 npm run build:ios
 
 # 開啟 Xcode
 npm run open:ios
 ```
+
+**重要說明：**
+
+- `npm run setup:ios` 等同於 `npx cap add ios`，是首次使用 iOS 功能的必要步驟
+- `npm run first:ios` 是為新手設計的一鍵命令，會自動完成所有初始化步驟
+- 此命令會創建 iOS 專案結構並安裝相關依賴
+- 過程中會自動執行 CocoaPods 安裝，請耐心等待完成
 
 ## 常見問題解決
 
@@ -187,25 +256,29 @@ https://capacitorjs.com/docs/ios#adding-the-ios-platform
 **完整解決步驟:**
 
 ```bash
-# 1. 添加 iOS 平台
+# 方法 1: 使用新的 npm script (推薦)
+npm run setup:ios
+
+# 方法 2: 直接使用 Capacitor 命令
 npx cap add ios
 
-# 2. 如果 pod install 過程中斷，手動完成
+# 如果 pod install 過程中斷，手動完成
 cd ios/App && pod install
 cd ../..
 
-# 3. 重新構建專案
+# 重新構建專案
 npm run build:ios
 
-# 4. 打開 Xcode 專案
+# 打開 Xcode 專案
 npm run open:ios
 ```
 
-**注意事項:**
+**重要提醒:**
 
-- CocoaPods 安裝可能需要幾分鐘時間，請耐心等待
-- 如果網路較慢，pod install 可能會超時，可以重複執行
-- 確保 macOS 和 Xcode 版本符合 Capacitor 要求
+- **首次使用者必讀**: 在第一次嘗試建置 iOS 版本前，務必執行 `npx cap add ios`
+- **網路需求**: 此過程需要下載 iOS 原生依賴，請確保網路連線穩定
+- **時間估算**: CocoaPods 安裝可能需要 2-10 分鐘，根據網路速度而定
+- **錯誤重試**: 如果網路較慢導致 pod install 失敗，可以重複執行命令
 
 ### 問題：iOS 代碼簽名錯誤
 
@@ -215,19 +288,52 @@ npm run open:ios
 Signing for "App" requires a development team. Select a development team in the Signing & Capabilities editor.
 ```
 
-**快速解決步驟:**
+**詳細解決步驟：**
 
-1. 在 Xcode 中點擊專案名稱 "App"
-2. 選擇 "Signing & Capabilities" 標籤
-3. 在 "Team" 選單中選擇您的 Apple ID
-4. 確保勾選 "Automatically manage signing"
-5. 如需要，修改 Bundle Identifier 為唯一名稱
+#### 步驟 1：打開簽名設定
 
-**個人免費帳號用戶:**
+1. 在 Xcode 左側專案導航器中，點擊最上方的 "App" 專案圖標
+2. 在中間區域選擇 "TARGETS" 下的 "App"
+3. 點擊右側的 "Signing & Capabilities" 標籤
 
-- 可以免費使用，但應用程式只能運行 7 天
-- 需要定期重新簽名
-- 無法發布到 App Store
+#### 步驟 2：設定自動簽名
+
+1. 確保勾選 "Automatically manage signing" 核取方塊
+2. 在 "Team" 下拉選單中：
+   - 如果已有 Apple ID，直接選擇
+   - 如果沒有，點擊 "Add Account..." 按鈕
+
+#### 步驟 3：添加 Apple ID（如果需要）
+
+1. 點擊 "Add Account..." 
+2. 選擇 "Apple ID"
+3. 輸入您的 Apple ID 和密碼
+4. 完成雙重認證（如果啟用）
+
+#### 步驟 4：修改 Bundle Identifier
+
+1. 將 Bundle Identifier 改為唯一名稱
+2. 建議格式：`com.yourname.welcomeapp`
+3. 例如：`com.john.welcomeapp` 或 `com.mary.myapp`
+
+#### 步驟 5：驗證設定
+
+確認以下設定正確：
+- ✅ "Automatically manage signing" 已勾選
+- ✅ Team 已選擇您的 Apple ID
+- ✅ Bundle Identifier 是唯一的
+- ✅ 沒有紅色錯誤訊息
+
+**Apple ID 帳號類型：**
+
+| 帳號類型 | 費用 | 功能 | 限制 |
+|---------|------|------|------|
+| **個人免費帳號** | 免費 | 模擬器測試<br>個人設備測試 | 應用程式 7 天後過期<br>無法上架 App Store |
+| **付費開發者帳號** | $99/年 | 完整開發權限<br>App Store 發布 | 無限制 |
+
+**新手建議：**
+- 使用免費 Apple ID 即可開始學習
+- 只有要發布應用程式時才需要付費帳號
 
 ### 問題：瀏覽器顯示空白頁面
 
@@ -255,18 +361,49 @@ npm run serve
 
 ### iOS 版本驗證（可選）
 
+**前置條件：**
+
+- [ ] 已執行 `npx cap add ios` 添加 iOS 平台
+- [ ] CocoaPods 安裝完成（無錯誤訊息）
+- [ ] 已在 Xcode 中完成代碼簽名設定
+
+**運行測試：**
+
 - [ ] Xcode 能正常打開專案
+- [ ] 沒有紅色的簽名錯誤訊息
 - [ ] 能選擇 iOS 模擬器
 - [ ] 能成功運行應用程式
 - [ ] 應用程式在模擬器中正常顯示
+
+### iOS 設定檢查清單
+
+#### Xcode 專案設定驗證
+
+**簽名與功能 (Signing & Capabilities)：**
+
+- [ ] "Automatically manage signing" 已勾選
+- [ ] "Team" 已選擇正確的 Apple ID
+- [ ] "Bundle Identifier" 設定為唯一名稱
+- [ ] 沒有紅色警告或錯誤訊息
+
+**建置設定：**
+
+- [ ] 選擇了正確的模擬器 (例如：iPhone 15)
+- [ ] 建置目標設定為 iOS 14.0 或更高版本
+
+**專案結構：**
+
+- [ ] 可以在專案導航器中看到 App 資料夾
+- [ ] public 資料夾包含 Web 檔案
+- [ ] Info.plist 檔案存在且可編輯
 
 ## 下一步
 
 ### 新手推薦路徑
 
-1. ✅ 完成快速開始
-2. 📖 閱讀 [本地開發指南](LOCAL_DEVELOPMENT.md)
-3. 🏗️ 了解 [專案架構](PROJECT_OVERVIEW.md)
+1. 完成快速開始
+2. 閱讀 [本地開發指南](LOCAL_DEVELOPMENT.md)
+3. 了解 [專案架構](PROJECT_OVERVIEW.md)
 4. 🤝 查看 [貢獻指南](CONTRIBUTING.md)
 
 ### 進階學習
@@ -301,6 +438,6 @@ npm run build:ios && npm run open:ios
 
 ---
 
-🎉 **恭喜！你已經成功運行 Welcome App！**
+**恭喜！你已經成功運行 Welcome App！**
 
 如果遇到任何問題，請查看 [本地開發指南](LOCAL_DEVELOPMENT.md) 或提交 [Issue](https://github.com/cychiang-ntpu/capacitor-hello-world-ios/issues)。

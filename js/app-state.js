@@ -1,4 +1,4 @@
-// 🏗️ App 狀態管理系統
+//  App 狀態管理系統
 // 管理使用者登入狀態、路由和全域狀態
 
 class AppState {
@@ -11,14 +11,14 @@ class AppState {
         this.init();
     }
     
-    // 🚀 初始化應用程式狀態
+    //  初始化應用程式狀態
     init() {
         this.loadFromStorage();
         this.checkAuthStatus();
         this.setupEventListeners();
     }
     
-    // 💾 從本地存儲載入資料
+    //  從本地存儲載入資料
     loadFromStorage() {
         try {
             const users = localStorage.getItem('app_users');
@@ -38,7 +38,7 @@ class AppState {
         }
     }
     
-    // 💾 儲存資料到本地存儲
+    //  儲存資料到本地存儲
     saveToStorage() {
         try {
             localStorage.setItem('app_users', JSON.stringify(this.users));
@@ -52,7 +52,7 @@ class AppState {
         }
     }
     
-    // 🔍 檢查驗證狀態
+    //  檢查驗證狀態
     checkAuthStatus() {
         if (this.currentUser && this.isLoggedIn) {
             this.currentPage = 'main';
@@ -62,7 +62,7 @@ class AppState {
         }
     }
     
-    // 📝 註冊新用戶
+    //  註冊新用戶
     register(userData) {
         try {
             // 檢查 email 是否已存在
@@ -93,7 +93,7 @@ class AppState {
         }
     }
     
-    // 🔐 用戶登入
+    //  用戶登入
     login(email, password) {
         try {
             const user = this.users.find(u => u.email === email && u.password === password);
@@ -120,7 +120,7 @@ class AppState {
         }
     }
     
-    // 🚪 用戶登出
+    //  用戶登出
     logout() {
         this.currentUser = null;
         this.isLoggedIn = false;
@@ -132,14 +132,14 @@ class AppState {
         this.navigateTo('register');
     }
     
-    // 🧭 頁面導航
+    //  頁面導航
     navigateTo(page) {
         this.currentPage = page;
         this.renderCurrentPage();
         this.updateURL();
     }
     
-    // 🎨 渲染當前頁面
+    //  渲染當前頁面
     renderCurrentPage() {
         const app = document.getElementById('app');
         if (!app) return;
@@ -167,7 +167,7 @@ class AppState {
         }
     }
     
-    // 🔗 更新 URL（模擬路由）
+    //  更新 URL（模擬路由）
     updateURL() {
         if (window.history && window.history.pushState) {
             const url = `#${this.currentPage}`;
@@ -175,7 +175,7 @@ class AppState {
         }
     }
     
-    // 👂 設置事件監聽器
+    //  設置事件監聽器
     setupEventListeners() {
         // 監聽瀏覽器返回按鈕
         window.addEventListener('popstate', (event) => {
@@ -191,21 +191,21 @@ class AppState {
         });
     }
     
-    // 📄 創建註冊頁面
+    //  創建註冊頁面
     createRegisterPage() {
         return window.pageRenderer.renderRegisterPage();
     }
     
-    // 📄 創建登入頁面
+    //  創建登入頁面
     createLoginPage() {
         return window.pageRenderer.renderLoginPage();
     }
     
-    // 📄 創建主頁面
+    //  創建主頁面
     createMainPage() {
         return window.pageRenderer.renderMainPage(this.currentUser);
     }
 }
 
-// 🌍 全域 App 狀態實例
+//  全域 App 狀態實例
 window.appState = new AppState();

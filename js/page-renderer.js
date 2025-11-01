@@ -1,4 +1,4 @@
-// 🎨 頁面渲染器
+//  頁面渲染器
 // 負責創建和渲染各個頁面的 UI 組件
 
 class PageRenderer {
@@ -6,7 +6,7 @@ class PageRenderer {
         this.validators = new FormValidators();
     }
     
-    // 📝 渲染註冊頁面
+    //  渲染註冊頁面
     renderRegisterPage() {
         const container = this.createPageContainer();
         
@@ -14,7 +14,7 @@ class PageRenderer {
             <div class="auth-container">
                 <div class="auth-header">
                     <div class="app-logo">
-                        <span class="logo-emoji">🚀</span>
+                        <span class="logo-emoji">Welcome</span>
                         <h1>Welcome App</h1>
                     </div>
                     <p class="auth-subtitle">建立你的帳戶，開始精彩旅程</p>
@@ -22,7 +22,7 @@ class PageRenderer {
                 
                 <form id="registerForm" class="auth-form">
                     <div class="form-group">
-                        <label for="reg-username">👤 用戶名稱</label>
+                        <label for="reg-username"> 用戶名稱</label>
                         <input 
                             type="text" 
                             id="reg-username" 
@@ -34,7 +34,7 @@ class PageRenderer {
                     </div>
                     
                     <div class="form-group">
-                        <label for="reg-email">📧 Email</label>
+                        <label for="reg-email"> Email</label>
                         <input 
                             type="email" 
                             id="reg-email" 
@@ -46,7 +46,7 @@ class PageRenderer {
                     </div>
                     
                     <div class="form-group">
-                        <label for="reg-password">🔒 密碼</label>
+                        <label for="reg-password"> 密碼</label>
                         <div class="password-input-container">
                             <input 
                                 type="password" 
@@ -56,7 +56,7 @@ class PageRenderer {
                                 required
                             >
                             <button type="button" class="toggle-password" data-target="reg-password">
-                                👁️
+                                👀
                             </button>
                         </div>
                         <div class="password-strength" id="password-strength"></div>
@@ -64,7 +64,7 @@ class PageRenderer {
                     </div>
                     
                     <div class="form-group">
-                        <label for="reg-confirm-password">🔒 確認密碼</label>
+                        <label for="reg-confirm-password"> 確認密碼</label>
                         <div class="password-input-container">
                             <input 
                                 type="password" 
@@ -74,14 +74,14 @@ class PageRenderer {
                                 required
                             >
                             <button type="button" class="toggle-password" data-target="reg-confirm-password">
-                                👁️
+                                👀
                             </button>
                         </div>
                         <div class="error-message" id="confirm-password-error"></div>
                     </div>
                     
                     <button type="submit" class="auth-button" id="register-btn">
-                        <span class="button-text">🎉 註冊帳戶</span>
+                        <span class="button-text"> 註冊帳戶</span>
                         <div class="loading-spinner" style="display: none;"></div>
                     </button>
                     
@@ -98,7 +98,7 @@ class PageRenderer {
         return container;
     }
     
-    // 🔐 渲染登入頁面
+    //  渲染登入頁面
     renderLoginPage() {
         const container = this.createPageContainer();
         
@@ -106,7 +106,7 @@ class PageRenderer {
             <div class="auth-container">
                 <div class="auth-header">
                     <div class="app-logo">
-                        <span class="logo-emoji">🚀</span>
+                        <span class="logo-emoji">Welcome</span>
                         <h1>Welcome App</h1>
                     </div>
                     <p class="auth-subtitle">歡迎回來！請登入你的帳戶</p>
@@ -114,7 +114,7 @@ class PageRenderer {
                 
                 <form id="loginForm" class="auth-form">
                     <div class="form-group">
-                        <label for="login-email">📧 Email</label>
+                        <label for="login-email"> Email</label>
                         <input 
                             type="email" 
                             id="login-email" 
@@ -126,7 +126,7 @@ class PageRenderer {
                     </div>
                     
                     <div class="form-group">
-                        <label for="login-password">🔒 密碼</label>
+                        <label for="login-password"> 密碼</label>
                         <div class="password-input-container">
                             <input 
                                 type="password" 
@@ -136,7 +136,7 @@ class PageRenderer {
                                 required
                             >
                             <button type="button" class="toggle-password" data-target="login-password">
-                                👁️
+                                👀
                             </button>
                         </div>
                         <div class="error-message" id="login-password-error"></div>
@@ -151,7 +151,7 @@ class PageRenderer {
                     </div>
                     
                     <button type="submit" class="auth-button" id="login-btn">
-                        <span class="button-text">🎯 立即登入</span>
+                        <span class="button-text"> 立即登入</span>
                         <div class="loading-spinner" style="display: none;"></div>
                     </button>
                     
@@ -169,7 +169,7 @@ class PageRenderer {
         return container;
     }
     
-    // 🏠 渲染主頁面
+    //  渲染主頁面
     renderMainPage(user) {
         const container = this.createPageContainer();
         
@@ -192,43 +192,43 @@ class PageRenderer {
                             </div>
                         </div>
                         <button id="logout-btn" class="logout-button">
-                            🚪 登出
+                             登出
                         </button>
                     </div>
                 </header>
                 
                 <main class="main-content">
                     <div class="dashboard">
-                        <h3>🎯 主要功能</h3>
+                        <h3> 主要功能</h3>
                         
                         <div class="feature-grid">
                             <div class="feature-card" data-feature="profile">
-                                <div class="feature-icon">👤</div>
+                                <div class="feature-icon"></div>
                                 <h4>個人資料</h4>
                                 <p>查看和編輯你的個人資訊</p>
                             </div>
                             
                             <div class="feature-card" data-feature="settings">
-                                <div class="feature-icon">⚙️</div>
+                                <div class="feature-icon"></div>
                                 <h4>設定</h4>
                                 <p>自訂應用程式偏好設定</p>
                             </div>
                             
                             <div class="feature-card" data-feature="notifications">
-                                <div class="feature-icon">🔔</div>
+                                <div class="feature-icon"></div>
                                 <h4>通知</h4>
                                 <p>管理你的通知和提醒</p>
                             </div>
                             
                             <div class="feature-card" data-feature="help">
-                                <div class="feature-icon">❓</div>
+                                <div class="feature-icon"></div>
                                 <h4>幫助</h4>
                                 <p>查看說明文件和常見問題</p>
                             </div>
                         </div>
                         
                         <div class="stats-section">
-                            <h3>📊 統計資訊</h3>
+                            <h3> 統計資訊</h3>
                             <div class="stats-grid">
                                 <div class="stat-item">
                                     <div class="stat-number">${this.getDaysSinceRegistration(user.registeredAt)}</div>
@@ -260,7 +260,7 @@ class PageRenderer {
         return container;
     }
     
-    // 📅 計算註冊天數
+    //  計算註冊天數
     getDaysSinceRegistration(registeredAt) {
         const registrationDate = new Date(registeredAt);
         const today = new Date();
@@ -269,7 +269,7 @@ class PageRenderer {
         return diffDays;
     }
     
-    // 🎯 設置註冊頁面事件
+    //  設置註冊頁面事件
     setupRegisterPageEvents(container) {
         const form = container.querySelector('#registerForm');
         const switchToLogin = container.querySelector('#switch-to-login');
@@ -290,7 +290,7 @@ class PageRenderer {
         this.setupPasswordToggle(container);
     }
     
-    // 🎯 設置登入頁面事件
+    //  設置登入頁面事件
     setupLoginPageEvents(container) {
         const form = container.querySelector('#loginForm');
         const switchToRegister = container.querySelector('#switch-to-register');
@@ -308,7 +308,7 @@ class PageRenderer {
         this.setupPasswordToggle(container);
     }
     
-    // 🎯 設置主頁面事件
+    //  設置主頁面事件
     setupMainPageEvents(container) {
         const logoutBtn = container.querySelector('#logout-btn');
         const featureCards = container.querySelectorAll('.feature-card');
@@ -329,7 +329,7 @@ class PageRenderer {
         });
     }
     
-    // 📝 處理註冊表單提交
+    //  處理註冊表單提交
     async handleRegisterSubmit(e) {
         e.preventDefault();
         
@@ -369,7 +369,7 @@ class PageRenderer {
         }
     }
     
-    // 🔐 處理登入表單提交
+    //  處理登入表單提交
     async handleLoginSubmit(e) {
         e.preventDefault();
         
@@ -405,7 +405,7 @@ class PageRenderer {
         }
     }
     
-    // ✅ 驗證註冊表單
+    //  驗證註冊表單
     validateRegisterForm(userData) {
         let isValid = true;
         
@@ -439,7 +439,7 @@ class PageRenderer {
         return isValid;
     }
     
-    // 🎨 工具方法
+    //  工具方法
     delay(ms) {
         return new Promise(resolve => setTimeout(resolve, ms));
     }
@@ -523,10 +523,10 @@ class PageRenderer {
                 
                 if (passwordInput.type === 'password') {
                     passwordInput.type = 'text';
-                    button.textContent = '🙈';
+                    button.textContent = 'Hide';
                 } else {
                     passwordInput.type = 'password';
-                    button.textContent = '👁️';
+                    button.textContent = '👀';
                 }
             });
         });
@@ -543,5 +543,5 @@ class PageRenderer {
     }
 }
 
-// 🌍 全域頁面渲染器實例
+//  全域頁面渲染器實例
 window.pageRenderer = new PageRenderer();

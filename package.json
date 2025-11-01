@@ -13,15 +13,18 @@
   },
   "scripts": {
     "build": "mkdir -p dist/css && cp index.html dist/ && cp css/style.css dist/css/ && cp -r js dist/",
-    "open:ios": "npx cap open ios",
-    "sync:ios": "npx cap sync ios", 
-    "copy": "npx cap copy",
     "serve": "npx http-server dist -p 8080",
     "dev": "npm run serve",
     "clean": "rm -rf dist ios node_modules",
-    "reset:ios": "rm -rf ios && npm run build && npx cap add ios",
-    "build:ios": "npm run build && npx cap sync ios",
-    "deploy:ios": "npm run build:ios && npx cap open ios"
+    "setup:ios": "npx cap add ios",
+    "sync:ios": "npx cap sync ios",
+    "copy": "npx cap copy",
+    "open:ios": "npx cap open ios",
+    "build:ios": "npm run build && npm run ensure:ios && npx cap sync ios",
+    "ensure:ios": "test -d ios || npm run setup:ios",
+    "deploy:ios": "npm run build:ios && npx cap open ios",
+    "reset:ios": "rm -rf ios && npm run build && npm run setup:ios",
+    "first:ios": "npm run build && npm run setup:ios && npm run open:ios"
   },
   "keywords": [
     "capacitor",

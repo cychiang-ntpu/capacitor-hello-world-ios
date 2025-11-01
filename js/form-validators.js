@@ -1,4 +1,4 @@
-// ✅ 表單驗證器
+//  表單驗證器
 // 處理各種表單欄位的驗證邏輯
 
 class FormValidators {
@@ -8,7 +8,7 @@ class FormValidators {
         this.passwordMinLength = 6;
     }
     
-    // 👤 驗證用戶名稱
+    //  驗證用戶名稱
     validateUsername(username) {
         if (!username || typeof username !== 'string') {
             return false;
@@ -18,7 +18,7 @@ class FormValidators {
         return trimmed.length >= this.usernameMinLength;
     }
     
-    // 📧 驗證 Email 格式
+    //  驗證 Email 格式
     validateEmail(email) {
         if (!email || typeof email !== 'string') {
             return false;
@@ -27,7 +27,7 @@ class FormValidators {
         return this.emailRegex.test(email.trim());
     }
     
-    // 🔒 驗證密碼強度
+    //  驗證密碼強度
     validatePassword(password) {
         if (!password || typeof password !== 'string') {
             return false;
@@ -36,7 +36,7 @@ class FormValidators {
         return password.length >= this.passwordMinLength;
     }
     
-    // 🎯 獲取密碼強度
+    //  獲取密碼強度
     getPasswordStrength(password) {
         if (!password) {
             return { class: 'weak', text: '' };
@@ -56,15 +56,15 @@ class FormValidators {
         if (/[^A-Za-z0-9]/.test(password)) score += 1;
         
         if (score < 3) {
-            return { class: 'weak', text: '🔴 密碼強度：弱' };
+            return { class: 'weak', text: '密碼強度：弱' };
         } else if (score < 5) {
-            return { class: 'medium', text: '🟡 密碼強度：中等' };
+            return { class: 'medium', text: '密碼強度：中等' };
         } else {
-            return { class: 'strong', text: '🟢 密碼強度：強' };
+            return { class: 'strong', text: '密碼強度：強' };
         }
     }
     
-    // 📱 驗證手機號碼（可選功能）
+    //  驗證手機號碼（可選功能）
     validatePhone(phone) {
         if (!phone) return false;
         
@@ -72,13 +72,13 @@ class FormValidators {
         return phoneRegex.test(phone.replace(/\s/g, ''));
     }
     
-    // 🎂 驗證年齡
+    //  驗證年齡
     validateAge(age) {
         const numAge = parseInt(age);
         return numAge >= 13 && numAge <= 120;
     }
     
-    // 🔗 驗證 URL
+    //  驗證 URL
     validateURL(url) {
         try {
             new URL(url);
