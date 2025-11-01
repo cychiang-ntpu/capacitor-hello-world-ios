@@ -35,6 +35,7 @@ capacitor-hello-world-ios/
 ├── 📄 README.md               # 專案主要說明文件 (這個文件)
 ├── 📄 index.html              # 主要 HTML 檔案 (25 行)
 ├── 📄 package.json            # 專案依賴設定
+├── 📄 package-lock.json       # npm 依賴鎖定檔
 ├── 📄 capacitor.config.json   # Capacitor 設定
 ├── 📄 LICENSE                 # MIT 授權文件
 │
@@ -61,16 +62,30 @@ capacitor-hello-world-ios/
 │   ├── css/                   # 建置後的樣式
 │   └── js/                    # 建置後的 JavaScript
 │
-├── 📱 ios/                    # iOS 原生專案
-│   ├── App/                   # Xcode 專案檔案
-│   └── capacitor-cordova-ios-plugins/  # Cordova 插件
-│
 ├── ⚙️ .github/                # GitHub 設定資料夾
-│   └── ISSUE_TEMPLATE/        # Issue 範本
+│   ├── ISSUE_TEMPLATE/        # Issue 範本
+│   │   ├── bug_report.md      # Bug 回報範本
+│   │   └── feature_request.md # 功能請求範本
+│   ├── workflows/             # GitHub Actions
+│   │   └── build.yml          # 自動建置流程
+│   └── pull_request_template.md # PR 範本
 │
-├── 🔧 .vscode/                # VS Code 設定
+├── 🛠️ 開發環境設定檔案
+│   ├── .editorconfig          # 編輯器統一設定
+│   ├── .env.example           # 環境變數範例檔
+│   ├── .prettierrc.json       # 程式碼格式化設定
+│   ├── .gitignore             # Git 忽略檔案清單
+│   └── .vscode/               # VS Code 設定
+│       ├── extensions.json    # 推薦擴充功能
+│       ├── launch.json        # 除錯設定
+│       ├── settings.json      # 編輯器設定
+│       └── tasks.json         # 任務設定
+│
 ├── 📦 node_modules/           # npm 依賴套件 (自動產生)
-└── 🔒 .gitignore              # Git 忽略檔案清單
+│
+└── � ios/ (使用 npm run build:ios 生成)
+    ├── App/                   # Xcode 專案檔案
+    └── capacitor-cordova-ios-plugins/  # Cordova 插件
 ```
 
 ## 快速開始
@@ -99,6 +114,73 @@ npm run open:ios
 ```
 
 📱 **在 Xcode 中**: 選擇模擬器並運行
+
+## 環境設定
+
+### 環境變數設定（進階）
+
+專案包含 `.env.example` 檔案，提供了環境變數的範例設定：
+
+```bash
+# 複製範例檔案為實際設定檔
+cp .env.example .env
+```
+
+#### 主要設定項目
+
+##### 📱 應用程式基本資訊
+
+- `APP_NAME` - 應用程式顯示名稱
+- `APP_ID` - 應用程式唯一識別碼
+- `APP_VERSION` - 應用程式版本號
+
+##### 🔧 開發環境設定
+
+- `DEV_SERVER_PORT` - 開發服務器端口（預設 8080）
+- `DEV_SERVER_HOST` - 開發服務器主機
+
+##### 🍎 iOS 專用設定
+
+- `IOS_BUNDLE_ID` - iOS Bundle 識別碼
+- `IOS_TEAM_ID` - Apple Developer Team ID（發布到 App Store 需要）
+
+##### ⚠️ 注意事項
+
+- `.env` 檔案包含敏感資訊，已在 `.gitignore` 中排除
+- 僅在需要自訂設定時才需要創建 `.env` 檔案
+- 大部分情況下使用預設設定即可正常運行
+
+## 🔧 故障排除
+
+### 常見問題
+
+#### iOS 平台未添加錯誤
+
+如果遇到以下錯誤：
+
+```text
+[error] ios platform has not been added yet.
+```
+
+**解決方法：**
+
+```bash
+# 添加 iOS 平台
+npx cap add ios
+
+# 如果 pod install 中斷，手動完成
+cd ios/App && pod install
+
+# 重新構建
+npm run build:ios
+```
+
+#### 其他常見問題
+
+- **端口被占用**: 修改 `package.json` 中的 `serve` 腳本端口
+- **權限問題**: 使用 `sudo` 執行 npm 安裝命令
+- **Xcode 問題**: 確保已安裝最新版本的 Xcode 和 Command Line Tools
+- **代碼簽名錯誤**: 在 Xcode 的 "Signing & Capabilities" 中選擇您的 Apple ID 作為開發團隊
 
 ## 完整文檔
 

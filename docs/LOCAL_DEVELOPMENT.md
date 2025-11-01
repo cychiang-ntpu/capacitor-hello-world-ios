@@ -349,6 +349,140 @@ open -n -a /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --args
 chrome.exe --user-data-dir="c:/tmp/chrome_dev" --disable-web-security
 ```
 
+### 常見問題 5：iOS 平台構建失敗
+
+**錯誤訊息：** `[error] ios platform has not been added yet.`
+
+**症狀：** 運行 `npm run build:ios` 時出現平台未添加的錯誤
+
+**完整解決步驟：**
+
+```bash
+# 1. 添加 iOS 平台
+npx cap add ios
+
+# 2. 如果 CocoaPods 安裝過程中斷，手動完成
+cd ios/App
+pod install
+cd ../..
+
+# 3. 重新構建專案
+npm run build:ios
+
+# 4. 打開 Xcode 專案
+npm run open:ios
+```
+
+**注意事項：**
+
+- 需要 macOS 系統和已安裝的 Xcode
+- CocoaPods 安裝可能需要數分鐘，請耐心等待
+- 如果網路較慢，可能需要重複執行 `pod install`
+- 確保 Xcode Command Line Tools 已安裝：`xcode-select --install`
+
+**進階診斷：**
+
+```bash
+# 檢查 Capacitor 狀態
+npx cap doctor
+
+# 檢查 iOS 專案結構
+ls -la ios/
+
+# 檢查 Podfile 是否存在
+cat ios/App/Podfile
+```
+
+### 常見問題 6：iOS 代碼簽名錯誤
+
+**錯誤訊息：** `Signing for "App" requires a development team. Select a development team in the Signing & Capabilities editor.`
+
+**症狀：** 在 Xcode 中嘗試構建或運行應用程式時出現簽名錯誤
+
+**解決步驟：**
+
+#### 方法一：在 Xcode 中設置（推薦）
+
+1. **打開 Xcode 專案**
+
+   ```bash
+   npm run open:ios
+   ```
+
+2. **選擇專案設定**
+   - 在左側專案導航器中點擊最上方的專案名稱 "App"
+   - 確保選中 "App" target
+
+3. **設置開發團隊**
+   - 點擊 "Signing & Capabilities" 標籤
+   - 在 "Team" 下拉選單中選擇您的 Apple ID 或開發團隊
+   - 如果沒有看到團隊，點擊 "Add Account..." 登入您的 Apple ID
+
+4. **自動管理簽名**
+   - 確保勾選 "Automatically manage signing"
+   - Xcode 會自動生成必要的證書和配置文件
+
+#### 方法二：使用個人免費帳號
+
+如果您沒有付費的 Apple Developer 帳號：
+
+1. **使用 Apple ID 登入**
+   - 在 Xcode 中前往 `Preferences` > `Accounts`
+   - 點擊 "+" 號添加 Apple ID
+   - 選擇 "Apple ID" 並登入
+
+2. **設置個人團隊**
+   - 回到專案設定的 "Signing & Capabilities"
+   - 選擇您的個人團隊（通常顯示為 "Personal Team"）
+
+3. **修改 Bundle Identifier**
+   - 將 Bundle Identifier 改為唯一的名稱
+   - 例如：`com.yourname.welcomeapp`
+
+#### 方法三：修改環境變數（進階）
+
+```bash
+# 編輯 .env 檔案
+cp .env.example .env
+```
+
+然後在 `.env` 檔案中設置：
+
+```bash
+# iOS 開發團隊 ID（可在 Apple Developer Portal 找到）
+IOS_TEAM_ID=YOUR_TEAM_ID_HERE
+
+# 唯一的 Bundle ID
+IOS_BUNDLE_ID=com.yourname.welcomeapp
+```
+
+重新同步專案：
+
+```bash
+npm run build:ios
+```
+
+**注意事項：**
+
+- **個人免費帳號限制**：應用程式只能在註冊的設備上運行 7 天
+- **付費開發者帳號**：$99/年，可發布到 App Store
+- **Bundle ID 必須唯一**：不能與已存在的應用程式重複
+- **真機測試需要**：設備必須在開發者帳號中註冊
+
+**除錯提示：**
+
+```bash
+# 檢查當前的簽名設定
+security find-identity -v -p codesigning
+
+# 清除 Xcode 快取
+rm -rf ~/Library/Developer/Xcode/DerivedData
+
+# 重新生成專案
+npm run clean
+npm run build:ios
+```
+
 ---
 
 ## 🎯 開發最佳實踐

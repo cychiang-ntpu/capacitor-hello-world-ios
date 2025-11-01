@@ -79,6 +79,20 @@ npm install
 npm list --depth=0
 ```
 
+##### 環境變數設定（可選）
+
+專案預設設定已足夠使用，但如需自訂可以：
+
+```bash
+# 複製環境變數範例檔案
+cp .env.example .env
+
+# 編輯 .env 檔案（可選）
+# 修改 APP_NAME、PORT 等設定
+```
+
+> 💡 **提示**: 首次使用建議跳過此步驟，使用預設設定即可
+
 #### 3. 建置專案
 
 ```bash
@@ -159,6 +173,61 @@ kill <PID>
 # 安裝 Xcode 命令行工具
 xcode-select --install
 ```
+
+### 問題：iOS 平台未添加錯誤
+
+如果運行 `npm run build:ios` 時遇到以下錯誤：
+
+```text
+[error] ios platform has not been added yet.
+See the docs for adding the ios platform:
+https://capacitorjs.com/docs/ios#adding-the-ios-platform
+```
+
+**完整解決步驟:**
+
+```bash
+# 1. 添加 iOS 平台
+npx cap add ios
+
+# 2. 如果 pod install 過程中斷，手動完成
+cd ios/App && pod install
+cd ../..
+
+# 3. 重新構建專案
+npm run build:ios
+
+# 4. 打開 Xcode 專案
+npm run open:ios
+```
+
+**注意事項:**
+
+- CocoaPods 安裝可能需要幾分鐘時間，請耐心等待
+- 如果網路較慢，pod install 可能會超時，可以重複執行
+- 確保 macOS 和 Xcode 版本符合 Capacitor 要求
+
+### 問題：iOS 代碼簽名錯誤
+
+如果在 Xcode 中看到簽名錯誤：
+
+```text
+Signing for "App" requires a development team. Select a development team in the Signing & Capabilities editor.
+```
+
+**快速解決步驟:**
+
+1. 在 Xcode 中點擊專案名稱 "App"
+2. 選擇 "Signing & Capabilities" 標籤
+3. 在 "Team" 選單中選擇您的 Apple ID
+4. 確保勾選 "Automatically manage signing"
+5. 如需要，修改 Bundle Identifier 為唯一名稱
+
+**個人免費帳號用戶:**
+
+- 可以免費使用，但應用程式只能運行 7 天
+- 需要定期重新簽名
+- 無法發布到 App Store
 
 ### 問題：瀏覽器顯示空白頁面
 

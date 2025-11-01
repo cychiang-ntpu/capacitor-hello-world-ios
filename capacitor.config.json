@@ -1,5 +1,5 @@
 {
-  "appId": "com.ntpu.welcomeapp",
+  "appId": "com.cychiang.welcomeapp.dev",
   "appName": "Welcome App",
   "webDir": "dist",
   "server": {

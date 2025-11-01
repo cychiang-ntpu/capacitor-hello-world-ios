@@ -7,13 +7,14 @@ capacitor-hello-world-ios/
 ├── 📄 README.md                 # 📚 專案主要說明文件
 ├── 📄 index.html                # 🏠 應用程式主頁面 (25 行)
 ├── 📄 package.json              # 📦 專案依賴和設定
+├── 📄 package-lock.json         # 🔒 npm 依賴鎖定檔
 ├── 📄 capacitor.config.json     # ⚙️ Capacitor 設定
 ├── 📄 LICENSE                   # 📜 MIT 授權文件
 │
 ├── 🎨 css/                      # 樣式表資料夾
 │   └── style.css                # 簡化的外部樣式表
 │
-├── � js/                       # 💻 JavaScript 核心程式碼
+├── 📱 js/                       # 💻 JavaScript 核心程式碼
 │   ├── app.js                   # 🎯 主控制器
 │   ├── app-state.js             # 🧠 狀態管理
 │   ├── page-renderer.js         # 🎨 頁面渲染器
@@ -28,31 +29,47 @@ capacitor-hello-world-ios/
 │   ├── REPOSITORY_INFO.md       # 📊 儲存庫資訊
 │   └── README_OLD.md            # 📝 原始詳細說明備份
 │
-├── � dist/                     # 建置輸出資料夾
+├── 🔧 dist/                     # 建置輸出資料夾
 │   ├── index.html               # 建置後的 HTML
 │   ├── css/                     # 建置後的樣式
 │   └── js/                      # 建置後的 JavaScript
 │
-├── 📱 ios/                      # 🍎 iOS 平台專用檔案
-│   ├── App/                     # Xcode 專案資料夾
-│   └── capacitor-cordova-ios-plugins/  # Cordova 插件
+├── ⚙️ .github/                  # GitHub 設定資料夾
+│   ├── ISSUE_TEMPLATE/          # Issue 範本
+│   │   ├── bug_report.md        # Bug 回報範本
+│   │   └── feature_request.md   # 功能請求範本
+│   ├── workflows/               # GitHub Actions
+│   │   └── build.yml            # 自動建置流程
+│   └── pull_request_template.md # PR 範本
 │
-├── ⚙️ .github/                  # GitHub 設定
-│   └── ISSUE_TEMPLATE/          # Issue 範本
+├── 🛠️ 開發環境設定檔案
+│   ├── .editorconfig            # 編輯器統一設定
+│   ├── .env.example             # 環境變數範例檔
+│   ├── .prettierrc.json         # 程式碼格式化設定
+│   ├── .gitignore               # Git 忽略檔案清單
+│   └── .vscode/                 # VS Code 設定
+│       ├── extensions.json      # 推薦擴充功能
+│       ├── launch.json          # 除錯設定
+│       ├── settings.json        # 編輯器設定
+│       └── tasks.json           # 任務設定
 │
-├── 🔧 .vscode/                  # VS Code 設定
 ├── 📦 node_modules/             # npm 依賴套件 (自動產生)
-└── 🔒 .gitignore                # Git 忽略檔案清單
+│
+└── 📱 ios/ (使用 npm run build:ios 生成)
+    ├── App/                     # Xcode 專案檔案
+    └── capacitor-cordova-ios-plugins/  # Cordova 插件
 ```
 
 ## 📚 文件導航指南
 
 ### 🔰 如果你是初學者
+
 1. **首先閱讀** → [README.md](../README.md) - 專案主要說明
 2. **快速體驗** → [QUICK_START.md](QUICK_START.md) - 15分鐘快速開始
 3. **深入學習** → [LOCAL_DEVELOPMENT.md](LOCAL_DEVELOPMENT.md) - 詳細開發指南
 
 ### 🚀 如果你有經驗
+
 1. **快速開始** → [QUICK_START.md](QUICK_START.md)
 2. **了解架構** → 繼續閱讀本文件
 3. **參與貢獻** → [CONTRIBUTING.md](CONTRIBUTING.md)
@@ -106,23 +123,23 @@ localStorage (資料保存)
 
 ## 🎓 學習路徑建議
 
-### � 新手路徑 (15-30 分鐘)
+### 🔰 新手路徑 (15-30 分鐘)
 
 1. [QUICK_START.md](QUICK_START.md) - 快速運行應用程式
 2. [LOCAL_DEVELOPMENT.md](LOCAL_DEVELOPMENT.md) - 了解本地開發
 
-### � 進階路徑 (1-2 小時)
+### 🚀 進階路徑 (1-2 小時)
 
 1. 閱讀主要的 [README.md](../README.md)
 2. 查看 [CONTRIBUTING.md](CONTRIBUTING.md) - 學習如何貢獻
 
-### � 開發者路徑
+### 🔧 開發者路徑
 
 1. 理解 `js/` 資料夾中的模組結構
 2. 修改 `css/style.css` 嘗試改變樣式
 3. 在 `index.html` 中調整介面
 
-## � 開發環境需求
+## 💻 開發環境需求
 
 ### 基本需求 (Web 開發)
 
@@ -136,13 +153,14 @@ localStorage (資料保存)
 - **Xcode 14+** - iOS 開發工具
 - **iOS 模擬器** - 測試應用程式
 
-## � 重要文檔說明
+## 📚 重要文檔說明
 
 - **README.md** - 專案主要說明，包含快速開始和完整功能介紹
 - **QUICK_START.md** - 15 分鐘快速上手指南
 - **LOCAL_DEVELOPMENT.md** - 詳細的本地開發環境設置
 - **CONTRIBUTING.md** - 如何參與專案開發的指南
 - **REPOSITORY_INFO.md** - 專案的技術細節和背景資訊
+- **.env.example** - 環境變數配置模板，包含 Capacitor 應用程式配置選項
 
 ## 🚀 立即開始
 
@@ -151,4 +169,3 @@ localStorage (資料保存)
 - 🏃‍♂️ **我想快速體驗** → [QUICK_START.md](QUICK_START.md)
 - 📚 **我想了解全貌** → [README.md](../README.md)
 - 🔧 **我想參與開發** → [CONTRIBUTING.md](CONTRIBUTING.md)
-
